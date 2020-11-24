@@ -6,7 +6,7 @@ session_start();
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-success  text-white">
-        <a class="logo">
+        <a class="logo" href="./homepage.php">
             <img src="./plaatjes/logo.png" height="50px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,31 +25,34 @@ session_start();
                     <a class="nav-link text-white" href="contact.php">Contact |</a>
                 </li>
                 <?php
-                if (isset($_SESSION['userId'] )) {
-                    if($_SESSION['userId'] == '16'){
+                if (isset($_SESSION['functie'] )) {
+                    if($_SESSION['functie'] == 'medewerker'){
                         echo"
 					<li class='nav-item'>
 						<a class='nav-link text-white' href='bestellingen.php'>Bestellingen |</a>
 
 					</li>
 					<li class='nav-item'>
-					<a class='nav-link text-white' href='gegevens.php'>Klant Gegevens |</a>
+					<a class='nav-link text-white' href='gegevens.php'>Gebruikers Paneel |</a>
                     </li>
                     <li class='nav-item'>
-					<a class='nav-link text-white' href='producttoevoegen.php'>Product Paneel |</a>
+					<a class='nav-link text-white' href='producttoevoegen.php'>Product Paneel</a>
                     </li>
-                     <li class='nav-item'>
-					<a class='nav-link text-white' href='medewerkervoeg.php'>Medewerkers |</a>
-                    </li>
+                   
 					";}}?>
+
                 <?php
-                if (isset($_SESSION['userId']  )) {
-                    if($_SESSION['userId'] != '16'){
+                if (isset($_SESSION['functie']  )) {
+                    if($_SESSION['functie'] != 'medewerker'){
                         echo"
 					<li class='nav-item'>
-						<a class='nav-link text-white' href='useredit.php'>Klant Gegevens</a>
+						<a class='nav-link text-white' href='useredit.php'>Klant Gegevens |</a>
+					</li>
+					<li class='nav-item'>
+						<a class='nav-link text-white' href='klantfactuur.php'>Bestelling</a>
 					</li>
 					";}}?>
+
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
@@ -78,9 +81,11 @@ session_start();
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item"><?php
                     if (isset($_SESSION['userId'])) {
+
                         echo '<div class=""><form action="Bijhorend/logout.inc.php" method="post">
 
 						<div class=""><button type="submit" name="logout-submit">Logout</button></div>
+						
 					</form></div>'
                         ;;;
 

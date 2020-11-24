@@ -1,8 +1,10 @@
 <?php
 session_start();
+error_reporting(0);
 include_once 'Bijhorend/databaseconnectie.php';
 
-error_reporting(0);
+$id=$_GET['id'];
+
 /* alleen medewerker */
 ?>
 <!DOCTYPE html>
@@ -33,18 +35,24 @@ error_reporting(0);
         <th>Klantnummer</th>
         <th><a href="bestellingen.php?sort=desc">Datum</a></th>
         <th><a href="bestellingen.php?sort=status">Afgeleverd?</a></th>
+        <th>Winkel</th>
         <th>Overzicht</th>
+        <th>Totaalprijs (excl verzendkosten)</th>
     </tr>
     </thead>
     <tbody>
     <?php
-    error_reporting(0);
-    $DBConnect5 = new mysqli("localhost","root","Dobbelsteen12!","flowerpower");
-    $ress="SELECT * FROM cart join cartartikels on cart.cart_id = cartartikels.cart_id group by idKlant";
+    $totaal = 0;
+    //$res=mysqli_query($conn, "SELECT Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id");
+
+    $DBConnect5 = new mysqli("localhost:3306","root","Dobbelsteen12!","flowerpower");
+    $res="SELECT Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id";
+    $restar = $DBConnect5->query($res);
+    $ress="SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id group by idUsers";
     $result = $DBConnect5->query($ress);
-    $resss = "SELECT * FROM cart join cartartikels on cart.cart_id = cartartikels.cart_id group by idKlant ORDER BY cart_date";
+    $resss = "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id group by idUsers ORDER BY cart_date";
     $resultt = $DBConnect5->query($resss);
-    $ressss = "SELECT * FROM cart join cartartikels on cart.cart_id = cartartikels.cart_id group by idKlant ORDER BY cart_status";
+    $ressss = "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id group by idUsers ORDER BY cart_status";
     $resulttt = $DBConnect5->query($ressss);
     while($row=mysqli_fetch_array($result))
     {
@@ -60,9 +68,10 @@ error_reporting(0);
 
         echo"<tr>";
         echo"<td>"; echo $row["cart_id"];  echo "</td>";
-        echo"<td>"; echo $row["idKlant"];  echo "</td>";
+        echo"<td>"; echo $row["idUsers"];  echo "</td>";
         echo"<td>"; echo $row["cart_date"]; echo "</td>";
         echo"<td>"; echo $row["cart_status"]; echo "</td>";
+        echo"<td>"; echo $row["winkel"]; echo "</td>";
 
 
 
@@ -74,13 +83,30 @@ error_reporting(0);
                 <button type="button" class="">Bekijken</button>
             </a>
             <?php echo "</td>";
+            echo "<td>"; ?>
+            <a href="bestellingen.php?id=<?php echo $row["cart_id"]; ?>">Klik voor weergave totaalprijs</a>
+            <?php
+            while($row=mysqli_fetch_array($restar))
+            {
+                $totaal=$totaal+$row['Aantal']*$row['product_price'];
+
+            }
+            ?>
+            <?php
+            echo "</td>";
         }
     }
+
+    if ($totaal >= 1){ echo"<th> totaalprijs: "; echo "€ "; echo $totaal;
+        echo"</th>";
+    }
+    else{}
+
 
     ?>
 
 
-    <?php require_once("bijhorend/footer.php");?>
+    <?php require_once("Bijhorend/footer.php");?>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

@@ -9,7 +9,7 @@ require_once("Bijhorend/component.php");
 if(isset($_POST['remove'])){
     if($_GET['action'] == 'remove'){
         foreach($_SESSION['Cart'] as $key => $value){
-            if($value["artikel_id"] == $_GET['id']){
+            if($value["idartikel"] == $_GET['id']){
                 unset($_SESSION['Cart'][$key]);
             }
         }
@@ -49,12 +49,12 @@ require_once('Bijhorend/header.php');
                 <?php
                 $total = 0;
                 if(isset($_SESSION['Cart'])){
-                    $artikel_id = array_column($_SESSION['Cart'], 'artikel_id');
+                    $artikel_id = array_column($_SESSION['Cart'], 'idartikel');
                     while($row = mysqli_fetch_assoc($resultt)){
                         foreach($artikel_id as $id){
-                            if($row['artikel_id'] == $id){
-                                cartElement($row['artikel_image'], $row['artikel_name'], $row['artikel_price'], $row['artikel_id'], $row['artikel_beschrijving']);
-                                $total = $total + (int)$row['artikel_price'];
+                            if($row['idartikel'] == $id){
+                                cartElement($row['image'], $row['artikelnaam'], $row['prijs'], $row['idartikel'], $row['omschrijving']);
+                                $total = $total + (int)$row['prijs'];
 
                             }
                         }

@@ -1,5 +1,18 @@
 <?php
-// start session
+session_start();
+$servername = "localhost:3306";
+$user = "root";
+$password = "Dobbelsteen12!";
+$dBName = "flowerpower";
+
+$conn = mysqli_connect($servername, $user, $password, $dBName);
+
+
+// informatie uit database halen
+$result = "SELECT * FROM winkel";
+$resultt = mysqli_query($conn, $result);
+
+error_reporting(0);
 
 ?>
 
@@ -39,7 +52,45 @@
 </div>
 <p>Winkels die wij hebben en telefoon-nummers</p>
 
+<div class="row">
+    <div class="col m-auto" style="margin-top: 100px">
+        <div class="card mt-5">
+            <table class="table table-bordered"
+            <tr>
+                <td>Winkel adres</td>
+                <td>Winkel postcode</td>
+                <td>Winkel plaats </td>
+                <td>Winkel telefoon</td>
+                <td>Winkel email</td>
 
+            </tr>
+            <?php
+            while ($row=mysqli_fetch_assoc($resultt)) {
+                $winkeladres = $row['winkeladres'];
+                $winkelpostcode = $row['winkelpostcode'];
+                $winkelplaats = $row['winkelplaats'];
+                $winkeltelefoon = $row['winkeltelefoon'];
+                $winkelemail = $row['winkelemail'];
+
+
+                ?>
+
+                <tr>
+                    <td><?php echo $winkeladres ?></td>
+                    <td><?php echo $winkelpostcode ?></td>
+                    <td><?php echo $winkelplaats ?></td>
+                    <td><?php echo $winkeltelefoon ?></td>
+                    <td><?php echo $winkelemail ?></td>
+
+
+
+
+                </tr>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
 
 <?php require_once("Bijhorend/footer.php");?>
 </body>

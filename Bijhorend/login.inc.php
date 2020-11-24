@@ -11,7 +11,7 @@ if (isset($_POST['login-submit'])) {
         exit();
     }
     else{
-        $sql = "SELECT * FROM klant WHERE uidKlant=? OR emailKlant=?;";
+        $sql = "SELECT * FROM klant WHERE usernaam=? OR email=?;";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../homepage.php?error=sqlerror");
@@ -23,23 +23,25 @@ if (isset($_POST['login-submit'])) {
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
             if ($row = mysqli_fetch_assoc($result)) {
-                $pwdCheck = password_verify($password, $row['pwdKlant']);
+                $pwdCheck = password_verify($password, $row['pwd']);
                 if ($pwdCheck == false) {
                     header("Location: ../homepage.php?error=wrongpwd");
                     exit();
                 }
                 else if ($pwdCheck == true ){
                     session_start();
-                    $_SESSION['userId'] = $row['idKlant'];
-                    $_SESSION['userUid'] = $row['uidKlant'];
+                    $_SESSION['functie'] = $row['functie'];
+                    $_SESSION['userId'] = $row['idklant'];
+                    $_SESSION['userUid'] = $row['usernaam'];
 
                     header("Location: ../homepage.php?login=succes");
                     exit();
                 }
                 else if ($pwdCheck == true){
                     session_start();
-                   $userid = $_SESSION['userId'] = $row['idKlant'];
-                    $username = $_SESSION['userUid'] = $row['uidKlant'];
+                    $functie = $_SESSION['functie'] = $row['functie'];
+                   $userid = $_SESSION['userId'] = $row['idklant'];
+                    $username = $_SESSION['userUid'] = $row['usernaam'];
 
                     header("Location: ../homepage.php?login=succes");
                     exit();

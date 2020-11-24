@@ -32,7 +32,7 @@ if (isset($_POST['signup-submit'])) {
 
     else {
 
-        $sql = "SELECT uidKlant FROM klant WHERE uidKlant=?";
+        $sql = "SELECT usernaam FROM klant WHERE usernaam=?";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../signup.php?error=sqlerror");
@@ -51,7 +51,7 @@ if (isset($_POST['signup-submit'])) {
 
             else {
 
-                $sql = "SELECT emailKlant FROM klant WHERE emailKlant=?";
+                $sql = "SELECT email FROM klant WHERE email=?";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)) {
                     header("Location: ../signup.php?error=sqlerror");
@@ -69,7 +69,7 @@ if (isset($_POST['signup-submit'])) {
                     }
                     else {
 
-                        $sql = "INSERT INTO klant (uidKlant, emailKlant, pwdKlant) VALUES (?, ?, ?)";
+                        $sql = "INSERT INTO klant (usernaam, email, pwd) VALUES (?, ?, ?)";
                         $stmt = mysqli_stmt_init($conn);
                         if (!mysqli_stmt_prepare($stmt, $sql)) {
                             header("Location: ../signup.php?error=sqlerror");

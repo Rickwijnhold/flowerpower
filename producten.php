@@ -3,24 +3,27 @@
 session_start();
 
 
-require_once('Bijhorend/databaseconnectie.php');
+
+
 require_once('./Bijhorend/component.php');
 
 
+
+// Als je op toevoegen drukt
 if(isset($_POST['add'])){
     /// print_r($_POST['product_id']);
     if(isset($_SESSION['Cart'])){
 
-        $item_array_id = array_column($_SESSION['Cart'], "artikel_id");
+        $item_array_id = array_column($_SESSION['Cart'], "idartikel");
 
-        if(in_array($_POST['artikel_id'], $item_array_id)){
+        if(in_array($_POST['idartikel'], $item_array_id)){
             echo "<script>alert('Product is already added in the cart..!')</script>";
             echo "<script>window.location = 'producten.php'</script>";
         }else{
 
             $count = count($_SESSION['Cart']);
             $item_array = array(
-                'artikel_id' => $_POST['artikel_id']
+                'idartikel' => $_POST['idartikel']
             );
 
             $_SESSION['Cart'][$count] = $item_array;
@@ -29,7 +32,7 @@ if(isset($_POST['add'])){
     }else{
 
         $item_array = array(
-            'artikel_id' => $_POST['artikel_id']
+            'idartikel' => $_POST['idartikel']
         );
 
         // create new session variable
@@ -69,7 +72,7 @@ error_reporting(0);
     <br>
     <b>Sorteren op:</b>
     <a href="producten.php?sort=desc">Artikelnummer</a>
-    <a href="producten.php?sort=status">Omschrijving</a>
+    <a href="producten.php?sort=status">Prijs Laag->Hoog</a>
     <div class="row text-center py-5">
 
 
@@ -77,9 +80,9 @@ error_reporting(0);
         $DBConnect5 = new mysqli("localhost:3306","root","Dobbelsteen12!","flowerpower");
         $result = "SELECT * FROM artikel";
         $resultt = $DBConnect5->query($result);
-        $resss = "SELECT * from artikel order by artikel_id";
+        $resss = "SELECT * from artikel order by idartikel";
         $resulttt = $DBConnect5->query($resss);
-        $ressss = "SELECT * from artikel order by artikel_name";
+        $ressss = "SELECT * from artikel order by prijs";
         $resultttt = $DBConnect5->query($ressss);
 
 
@@ -96,7 +99,7 @@ error_reporting(0);
             }
 
 
-            component($row['artikel_name'], $row['artikel_price'], $row['artikel_image'], $row['artikel_id'], $row['product_beschrijving']);
+            component($row['artikelnaam'], $row['prijs'], $row['image'], $row['idartikel'], $row['omschrijving']);
         }
         ?>
 

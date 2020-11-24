@@ -9,19 +9,19 @@ function component($artikelname, $artikelprice, $artikelimg, $artikelid, $artike
 					<div>
 						<img src=\"$artikelimg\" alt=\"Image1\" class=\"img-fluid card-img-top\">
 					</div>
-					<div class=\"card-body bg-secondary\">
-						<h5 class=\"card-title\">$artikelname</h5>
+					<div class=\"card-body bg-success\">
+						<h5 class=\"card-title text-white\">$artikelname</h5>
 						<h6>
 							
 						</h6>
 						<p class=\"card-text\">
 						</p>
 						<h5>
-							<span class=\"price\">$artikelprice</span>
+							<span class=\"price text-white\">€ $artikelprice</span>
 						</h5>
 						
 						<button type=\"submit\" class=\"btn btn-warning my-3\" name=\"add\">Toevoegen winkelmand <i class=\"fas fa-shopping-cart\"></i></button>
-						<input type='hidden' name='artikel_id' value='$artikelid'>
+						<input type='hidden' name='idartikel' value='$artikelid'>
 					</div>
 				</div>
 			</form>

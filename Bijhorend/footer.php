@@ -1,5 +1,5 @@
 <footer>
     <div class="footer bg-success">
-        Copyright By Rick
+        © Copyright 2020 By Rick
     </div>
 </footer>

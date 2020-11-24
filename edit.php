@@ -12,14 +12,14 @@ if (!$conn) {
 }
 
 $UserID = $_GET['GetID'];
-$query = " select * from klant where idKlant='".$UserID."'";
+$query = " select * from klant where idklant='".$UserID."'";
 $result = mysqli_query($conn,$query);
 
 while($row=mysqli_fetch_assoc($result))
 {
-    $UserID = $row['idKlant'];
-    $username = $row['uidKlant'];
-    $email = $row['emailKlant'];
+    $UserID = $row['idklant'];
+    $username = $row['usernaam'];
+    $email = $row['email'];
 }
 
 ?>

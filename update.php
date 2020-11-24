@@ -16,7 +16,7 @@ if(isset($_POST['update']))
     $UserName = $_POST['name'];
     $UserEmail = $_POST['email'];
 
-    $query = " update klant set uidKlant = '".$UserName."', emailKlant='".$UserEmail."' where idKlant='".$UserID."'";
+    $query = " update klant set usernaam = '".$UserName."', email='".$UserEmail."' where idklant='".$UserID."'";
     $result = mysqli_query($conn,$query);
 
     if($result)

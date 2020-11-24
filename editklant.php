@@ -12,14 +12,22 @@ if (!$conn) {
 }
 
 $UserID = $_GET['GetID'];
-$query = " select * from klant where idKlant='".$UserID."'";
+$query = " select * from klant where idklant='".$UserID."'";
 $result = mysqli_query($conn,$query);
 
 while($row=mysqli_fetch_assoc($result))
 {
-    $UserID = $row['idKlant'];
-    $username = $row['uidKlant'];
-    $email = $row['emailKlant'];
+    $UserID = $row['idklant'];
+    $username = $row['usernaam'];
+    $email = $row['email'];
+    $voornaam = $row['voornaam'];
+    $tussenvoegsel = $row['tussenvoegsel'];
+    $achternaam = $row['achternaam'];
+    $adres = $row['adres'];
+    $huisnr = $row['huisnr'];
+    $postcode = $row['postcode'];
+    $plaats = $row['plaats'];
+    $telefoon = $row['telefoon'];
 }
 
 ?>
@@ -45,12 +53,21 @@ while($row=mysqli_fetch_assoc($result))
 
                     <form action="updateklant.php?ID=<?php echo $UserID ?>" method="post">
                         <input type="text" class="form-control mb-2" placeholder=" User Name " name="ID" value="<?php echo $UserID ?>">
-                        <input type="text" class="form-control mb-2" placeholder=" User Email " name="name" value="<?php echo $username ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Username " name="name" value="<?php echo $username ?>">
                         <input type="email" class="form-control mb-2" placeholder=" User Email " name="email" value="<?php echo $email ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Voornaam " name="voornaam" value="<?php echo $voornaam ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Tussenvoegsel " name="tussenvoegsel" value="<?php echo $tussenvoegsel ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Achternaam " name="achternaam" value="<?php echo $achternaam ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Adres " name="adres" value="<?php echo $adres ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Huisnr " name="huisnr" value="<?php echo $huisnr ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Postcode " name="postcode" value="<?php echo $postcode ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Plaats " name="plaats" value="<?php echo $plaats ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User Telefoon-nummer " name="telefoon" value="<?php echo $telefoon ?>">
                         <button class="btn btn-primary" name="update">Update</button>
                     </form>
 
                 </div>
+
             </div>
         </div>
     </div>

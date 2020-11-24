@@ -13,7 +13,7 @@ if (!$conn) {
 
 if (isset($_GET['Del'])) {
     $ArtikelID = $_GET['Del'];
-    $query = " delete from artikel where artikel_id = '".$ArtikelID."'";
+    $query = " delete from artikel where idartikel = '".$ArtikelID."'";
     $result = mysqli_query($conn,$query);
 
     if ($result)

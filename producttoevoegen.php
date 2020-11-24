@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
 $servername = "localhost:3306";
 $user = "root";
 $password = "Dobbelsteen12!";
@@ -9,7 +11,9 @@ $conn = mysqli_connect($servername, $user, $password, $dBName);
 if (!$conn) {
     die("connection failed: ".mysqli_connect_error());
 }
-
+if(!isset($_SESSION['userId'])){ //if login in session is not set
+    header("Location: homepage.php");
+}
 // informatie uit database halen
 $result = "SELECT * FROM artikel";
 $resultt = mysqli_query($conn, $result);
@@ -54,11 +58,11 @@ error_reporting(0);
                 </tr>
                 <?php
                 while ($row=mysqli_fetch_assoc($resultt)) {
-                    $artikelId = $row['artikel_id'];
-                    $artikelName = $row['artikel_name'];
-                    $artikelPrice = $row['artikel_price'];
-                    $artikelBeschrijving = $row['artikel_beschrijving'];
-                    $artikelImage = $row['artikel_image'];
+                    $artikelId = $row['idartikel'];
+                    $artikelName = $row['artikelnaam'];
+                    $artikelPrice = $row['prijs'];
+                    $artikelBeschrijving = $row['omschrijving'];
+                    $artikelImage = $row['image'];
                     ?>
 
                     <tr>
@@ -76,7 +80,15 @@ error_reporting(0);
                     <?php
                 }
                 ?>
-                <a href="addartikel.php"class="btn btn-success float-right mb-1"><i class="fa fa-plus"></i>Voeg toe</a>
+                Voeg product toe
+                <form action="addquery.php" method="post">
+                    <input type="text" class="form-control mb-2" placeholder=" Artikel Name " name="name" value="">
+                    <input type="text" class="form-control mb-2" placeholder=" Artikel Price " name="price" value="">
+                    <input type="text" class="form-control mb-2" placeholder=" Artikel Beschrijving " name="beschrijving" value="">
+                    <input type="text" class="form-control mb-2" placeholder=" Artikel Image URL " name="image" value="">
+
+                    <button class="btn btn-primary" name="update">Voeg Toe</button>
+                </form>
                 </table>
             </div>
         </div>

@@ -18,7 +18,7 @@ if(isset($_POST['update']))
     $beschrijving = $_POST['beschrijving'];
     $image = $_POST['image'];
 
-    $query = " update artikel set artikel_name = '".$name."', artikel_price='".$price."',artikel_beschrijving='".$beschrijving."', artikel_image='".$image."' where artikel_id = '".$id."'";
+    $query = " update artikel set artikelnaam = '".$name."', prijs='".$price."',omschrijving='".$beschrijving."', image='".$image."' where idartikel = '".$id."'";
     $result = mysqli_query($conn,$query);
 
     if($result)

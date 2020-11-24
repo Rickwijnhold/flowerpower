@@ -18,35 +18,7 @@ if (!$conn) {
 // informatie uit database halen
 $result = "SELECT * FROM klant where idKlant = '".$_SESSION['userId']."'";
 $resultt = mysqli_query($conn, $result);
-if(isset($_POST['add'])){
-    /// print_r($_POST['product_id']);
-    if(isset($_SESSION['Cart'])){
 
-        $item_array_id = array_column($_SESSION['Cart'], "artikel_id");
-
-        if(in_array($_POST['artikel_id'], $item_array_id)){
-            echo "<script>alert('Product is already added in the cart..!')</script>";
-            echo "<script>window.location = 'producten.php'</script>";
-        }else{
-
-            $count = count($_SESSION['Cart']);
-            $item_array = array(
-                'artikel_id' => $_POST['artikel_id']
-            );
-
-            $_SESSION['Cart'][$count] = $item_array;
-        }
-
-    }else{
-
-        $item_array = array(
-            'artikel_id' => $_POST['artikel_id']
-        );
-
-        // create new session variable
-        $_SESSION['Cart'][0] = $item_array;
-    }
-}
 error_reporting(0);
 
 ?>
@@ -83,22 +55,46 @@ error_reporting(0);
             <div class="card mt-5">
                 <table class="table table-bordered"
                 <tr>
-                    <td>User ID</td>
-                    <td>Username</td>
+                    <td>Gebruiker id</td>
+                    <td>Gebruikers naam</td>
                     <td>Email</td>
+                    <td>Voornaam</td>
+                    <td>Tussenvoegsel</td>
+                    <td>Achternaam</td>
+                    <td>Adres</td>
+                    <td>Huisnummer</td>
+                    <td>Postcode</td>
+                    <td>Plaats</td>
+                    <td>Telefoon</td>
                     <td>Edit</td>
                 </tr>
                 <?php
                 while ($row=mysqli_fetch_assoc($resultt)) {
-                    $UserID = $row['idKlant'];
-                    $username = $row['uidKlant'];
-                    $email = $row['emailKlant'];
+                    $UserID = $row['idklant'];
+                    $username = $row['usernaam'];
+                    $email = $row['email'];
+                    $voornaam = $row['voornaam'];
+                    $tussenvoegsel = $row['tussenvoegsel'];
+                    $achternaam = $row['achternaam'];
+                    $adres = $row['adres'];
+                    $huisnr = $row['huisnr'];
+                    $postcode = $row['postcode'];
+                    $plaats = $row['plaats'];
+                    $telefoon = $row['telefoon'];
                     ?>
 
                     <tr>
                         <td><?php echo $UserID ?></td>
                         <td><?php echo $username ?></td>
-                        <td><?php echo $email ?></td>
+                        <td><?php echo $email ?>
+                        <td><?php echo $voornaam ?></td>
+                        <td><?php echo $tussenvoegsel ?></td>
+                        <td><?php echo $achternaam ?></td>
+                        <td><?php echo $adres ?></td>
+                        <td><?php echo $huisnr ?></td>
+                        <td><?php echo $postcode ?></td>
+                        <td><?php echo $plaats ?></td>
+                        <td><?php echo $telefoon ?></td>
                         <td><a href="editklant.php?GetID=<?php echo $UserID ?>">Edit</a></td>
 
 

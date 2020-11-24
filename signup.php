@@ -66,6 +66,7 @@ else if ($_GET["signup"] == "succes") {
 
 
 
+
     <form action="Bijhorend/signup.inc.php" method="post">
         <div class="container col-lg-4">
             <h3 class="text-center py-1">Signup</h3>

@@ -39,29 +39,30 @@ error_reporting(0);
             <div class="card mt-5">
                 <table class="table table-bordered"
                 <tr>
-                    <td>User ID</td>
-                    <td>Username</td>
-                    <td>Email</td>
+                    <td>Medewerker ID</td>
                     <td>Voornaam</td>
+                    <td>Tussenvoegsel</td>
                     <td>Achternaam</td>
+                    <td>Vestiging</td>
                     <td>Edit</td>
                     <td>Delete</td>
                 </tr>
                 <?php
                 while ($row=mysqli_fetch_assoc($resultt)) {
                     $UserID = $row['idmedewerker'];
-                    $username = $row['uidMedewerker'];
-                    $email = $row['emailMedewerker'];
-                    $voornaam = $row['voornaamMedewerker'];
-                    $achternaam = $row['achternaamMedewerker'];
+                    $mnaam = $row['voornaam'];
+                    $mtussen = $row['tussenvoegsel'];
+                    $machternaam = $row['achternaam'];
+                    $mvestiging = $row['vestiging'];
+
                     ?>
 
                     <tr>
                         <td><?php echo $UserID ?></td>
-                        <td><?php echo $username ?></td>
-                        <td><?php echo $email ?></td>
-                        <td><?php echo $voornaam ?></td>
-                        <td><?php echo $achternaam ?></td>
+                        <td><?php echo $mnaam ?></td>
+                        <td><?php echo $mtussen ?></td>
+                        <td><?php echo $machternaam ?></td>
+                        <td><?php echo $mvestiging ?></td>
                         <td><a href="edit.php?GetID=<?php echo $UserID ?>">Edit</a></td>
                         <td><a href="delete.php?Del=<?php echo $UserID ?>">Delete</a></td>
 

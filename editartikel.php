@@ -12,16 +12,16 @@ if (!$conn) {
 }
 
 $artikelId = $_GET['GetID'];
-$query = " select * from artikel where artikel_id='".$artikelId."'";
+$query = " select * from artikel where idartikel='".$artikelId."'";
 $result = mysqli_query($conn,$query);
 
 while($row=mysqli_fetch_assoc($result))
 {
-    $artikelId = $row['artikel_id'];
-    $artikelName = $row['artikel_name'];
-    $artikelPrice = $row['artikel_price'];
-    $artikelBeschrijving = $row['artikel_beschrijving'];
-    $artikelImage = $row['artikel_image'];
+    $artikelId = $row['idartikel'];
+    $artikelName = $row['artikelnaam'];
+    $artikelPrice = $row['prijs'];
+    $artikelBeschrijving = $row['omschrijving'];
+    $artikelImage = $row['image'];
 }
 
 ?>

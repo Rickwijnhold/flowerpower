@@ -12,13 +12,12 @@ if (!$conn) {
 }
 if(isset($_POST['update']))
 {
-    $artikelID = $_POST['ID'];
-    $artikelName = $_POST['name'];
-    $artikelPrice = $_POST['price'];
-    $artikelBeschrijving = $_POST['beschrijving'];
-    $artikelImage = $_POST['image'];
+    $naam = $_POST['name'];
+    $prijs = $_POST['price'];
+    $omschrijving = $_POST['beschrijving'];
+    $image = $_POST['image'];
 
-    $query = "insert into artikel(artikel_id,artikel_name,artikel_price,artikel_beschrijving,artikel_image)VALUES($artikelID,$artikelName,$artikelPrice,$artikelBeschrijving,$artikelImage);";
+    $query = "insert into artikel(artikelnaam,prijs,omschrijving,image)VALUES('$naam',$prijs,'$omschrijving','$image');";
     $result = mysqli_query($conn,$query);
     if($result)
     {
