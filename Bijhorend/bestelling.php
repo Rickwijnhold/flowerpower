@@ -2,7 +2,7 @@
 session_start();
 include_once 'databaseconnectie.php';
 
-$idKlant = $_SESSION['KlantId'];
+$idUsers = $_SESSION['userId'];
 
 
 
@@ -12,7 +12,7 @@ while($row = mysqli_fetch_assoc($resultt)){
         $row['idartikel'] == $id;
 }
 
-$sqlll = "INSERT INTO cart (idklant, idartikel) values ($idKlant, $id);";
+$sqlll = "INSERT INTO cart (idklant, idartikel) values ($idUsers, $id);";
 
 mysqli_query($conn, $sqlll);
 header("location:../homepage.php");

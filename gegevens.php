@@ -39,8 +39,7 @@ error_reporting(0);
             <div class="card mt-5">
 
 
-
-
+                <h2>Klanten</h2>
                 <table>
                     <thead>
                     <tr>
@@ -65,8 +64,70 @@ error_reporting(0);
                     </thead>
                     <tbody>
                     <?php
-                    $res=mysqli_query($conn,"select * from klant");
+                    $res=mysqli_query($conn,"select * from klant where functie ='klant'");
                  /*   $ress=mysqli_query($conn,"select * from klant right join users_has_functies on users.idUsers = users_has_functies.idUsers ");*/
+                    while($row=mysqli_fetch_array($res))
+                    {
+                        echo"<tr>";
+                        echo"<td>"; echo $row["idklant"];  echo "</td>";
+                        echo"<td>"; echo $row["usernaam"];  echo "</td>";
+                        echo"<td>"; echo $row["email"]; echo "</td>";
+                        echo"<td>"; echo $row["voornaam"]; echo "</td>";
+                        echo"<td>"; echo $row["tussenvoegsel"]; echo "</td>";
+                        echo"<td>"; echo $row["achternaam"]; echo"</td>";
+                        echo"<td>"; echo $row["adres"]; echo"</td>";
+                        echo"<td>"; echo $row["huisnr"]; echo"</td>";
+                        echo"<td>"; echo $row["postcode"]; echo"</td>";
+                        echo"<td>"; echo $row["plaats"]; echo"</td>";
+                        echo"<td>"; echo $row["telefoon"]; echo"</td>";
+                        echo"<td>"; echo $row["functie"]; echo"</td>";
+
+
+                        if (isset($_SESSION['userId'])) {
+                            echo "<td>";
+                            ?>
+                            <a href="editt.php?id=<?php echo $row["idklant"]; ?>">
+                                <button type="button" class="">Wijzigen</button>
+                            </a>
+                            <?php echo "</td>";
+                            echo"<td>";?>
+                            <a href="Bijhorend/deletee.php?id=<?php echo $row["idklant"];?>">
+                                <button type="button" class="">Verwijder</button>
+                            </a>
+                            <?php echo "</td>";
+                            echo"</tr>";
+                        }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                <h2>Medewerkers</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>idUsers</th>
+                        <th>Username</th>
+                        <th>E-mail</th>
+                        <th>Voornaam</th>
+                        <th>Tussenvoegsel</th>
+                        <th>Achternaam</th>
+                        <th>Adres</th>
+                        <th>Huisnummer</th>
+                        <th>Postcode</th>
+                        <th>Plaats</th>
+                        <th>Telefoon</th>
+                        <th>Functie</th>
+                        <?php if (isset($_SESSION['userId'])) {
+                            echo '
+							<th>Wijzigen</th>
+							<th>Verwijderen</th>
+						';}?>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $res=mysqli_query($conn,"select * from klant where functie = 'medewerker'");
+                    /*   $ress=mysqli_query($conn,"select * from klant right join users_has_functies on users.idUsers = users_has_functies.idUsers ");*/
                     while($row=mysqli_fetch_array($res))
                     {
                         echo"<tr>";

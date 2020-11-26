@@ -1,11 +1,13 @@
 <?php
 session_start();
+// Inlog gegevens van mijn database.
 $servername = "localhost:3306";
 $user = "root";
 $password = "Dobbelsteen12!";
 $dBName = "flowerpower";
 
 $conn = mysqli_connect($servername, $user, $password, $dBName);
+
 
 
 // informatie uit database halen
@@ -30,6 +32,7 @@ error_reporting(0);
 
 </head>
 <body class="contactbody">
+<!--Hiermee hoef ik niet elke keer de lange code van de header in elke pagina te zetten. Maar hoef ik alleen het te vermelden met een require_once code. Dit zorgt ervoor dat mijn code overzichtelijk blijft-->
 <?php require_once("Bijhorend/header.php");?>
 
 
@@ -65,6 +68,7 @@ error_reporting(0);
 
             </tr>
             <?php
+            // haalt alle gegevens van de winkels uit de database.
             while ($row=mysqli_fetch_assoc($resultt)) {
                 $winkeladres = $row['winkeladres'];
                 $winkelpostcode = $row['winkelpostcode'];
@@ -76,6 +80,7 @@ error_reporting(0);
                 ?>
 
                 <tr>
+<!--                    Met echo zorg ik ervoor dat het op het scherm te zien is. (de informatie van de winkels)-->
                     <td><?php echo $winkeladres ?></td>
                     <td><?php echo $winkelpostcode ?></td>
                     <td><?php echo $winkelplaats ?></td>

@@ -5,7 +5,6 @@ include_once 'Bijhorend/databaseconnectie.php';
 
 $id=$_GET['id'];
 
-/* alleen medewerker */
 ?>
 <!DOCTYPE html>
 <html>
