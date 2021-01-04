@@ -6,15 +6,17 @@ session_start();
 
 
 require_once('./Bijhorend/component.php');
-
+require_once("Bijhorend/databaseconnectie.php");
 
 
 // Als je op toevoegen drukt
 if(isset($_POST['add'])){
+
     /// print_r($_POST['product_id']);
     if(isset($_SESSION['Cart'])){
 
         $item_array_id = array_column($_SESSION['Cart'], "idartikel");
+
 
         if(in_array($_POST['idartikel'], $item_array_id)){
             echo "<script>alert('Product is already added in the cart..!')</script>";
@@ -24,9 +26,19 @@ if(isset($_POST['add'])){
             $count = count($_SESSION['Cart']);
             $item_array = array(
                 'idartikel' => $_POST['idartikel']
+
             );
 
             $_SESSION['Cart'][$count] = $item_array;
+
+
+            $id = $_POST['idartikel'];
+            $naam = $_POST['nameartikel'];
+            $prijs = $_POST['priceartikel'];
+
+            $query = " INSERT into cartproducten (product_id, product_name,product_price,Aantal,total_price)VALUES ('".$id."','".$naam."','".$prijs."',1,'".$prijs."')";
+            $result = mysqli_query($conn,$query);
+
         }
 
     }else{

@@ -6,6 +6,29 @@ include_once 'Bijhorend/databaseconnectie.php';
 $id=$_GET['id'];
 
 ?>
+<?php
+    session_start();
+
+    $servername = "localhost:3306";
+    $user = "root";
+    $password = "Dobbelsteen12!";
+    $dBName = "flowerpower";
+
+    $conn = mysqli_connect($servername, $user, $password, $dBName);
+
+    if (!$conn) {
+        die("connection failed: ".mysqli_connect_error());
+    }
+    if(!isset($_SESSION['userId'])){ //if login in session is not set
+        header("Location: homepage.php");
+    }
+    // informatie uit database halen
+    $result = "SELECT * FROM orders";
+    $resultt = mysqli_query($conn, $result);
+
+    error_reporting(0);
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,79 +53,47 @@ $id=$_GET['id'];
 <table class="container">
     <thead>
     <tr>
-        <th>Bestelnummer</th>
-        <th>Klantnummer</th>
-        <th><a href="bestellingen.php?sort=desc">Datum</a></th>
-        <th><a href="bestellingen.php?sort=status">Afgeleverd?</a></th>
-        <th>Winkel</th>
-        <th>Overzicht</th>
+        <th>Order id</th>
+        <th>Klant naam</th>
+        <th>email</th>
+        <th>telefoon nummer</th>
+        <th>adres</th>
+        <th>betalings methode</th>
+        <th>product(s)</th>
         <th>Totaalprijs (excl verzendkosten)</th>
     </tr>
     </thead>
     <tbody>
     <?php
-    $totaal = 0;
-    //$res=mysqli_query($conn, "SELECT Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id");
+                while ($row=mysqli_fetch_assoc($resultt)) {
+                    $orderid = $row['idorders'];
+                    $knaam = $row['ordername'];
+                    $email = $row['email'];
+                    $nummer = $row['phone'];
+                    $adres = $row['address'];
+                    $method = $row['pmode'];
+                    $products = $row['products'];
+                    $paid = $row['amount_paid'];
 
-    $DBConnect5 = new mysqli("localhost:3306","root","Dobbelsteen12!","flowerpower");
-    $res="SELECT Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id";
-    $restar = $DBConnect5->query($res);
-    $ress="SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id group by idUsers";
-    $result = $DBConnect5->query($ress);
-    $resss = "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id group by idUsers ORDER BY cart_date";
-    $resultt = $DBConnect5->query($resss);
-    $ressss = "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id group by idUsers ORDER BY cart_status";
-    $resulttt = $DBConnect5->query($ressss);
-    while($row=mysqli_fetch_array($result))
-    {
-
-        if($_GET['sort'] == 'desc')
-        {
-            $row = mysqli_fetch_array($resultt);
-        }
-        if($_GET['sort'] == 'status')
-        {
-            $row = mysqli_fetch_array($resulttt);
-        }
-
-        echo"<tr>";
-        echo"<td>"; echo $row["cart_id"];  echo "</td>";
-        echo"<td>"; echo $row["idUsers"];  echo "</td>";
-        echo"<td>"; echo $row["cart_date"]; echo "</td>";
-        echo"<td>"; echo $row["cart_status"]; echo "</td>";
-        echo"<td>"; echo $row["winkel"]; echo "</td>";
+                    ?>
+                    <tr>
+                        <td><?php echo $orderid ?></td>
+                        <td><?php echo $knaam ?></td>
+                        <td><?php echo $email ?></td>
+                        <td><?php echo $nummer ?></td>
+                        <td><?php echo $adres ?></td>
+                        <td><?php echo $method ?></td>
+                        <td><?php echo $products ?></td>
+                        <td><?php echo $paid ?></td>
 
 
+                    </tr>
+
+                    <?php
+                }
 
 
-        if (isset($_SESSION['userId'])) {
-            echo "<td>";
-            ?>
-            <a href="overzicht.php?id=<?php echo $row["cart_id"]; ?>">
-                <button type="button" class="">Bekijken</button>
-            </a>
-            <?php echo "</td>";
-            echo "<td>"; ?>
-            <a href="bestellingen.php?id=<?php echo $row["cart_id"]; ?>">Klik voor weergave totaalprijs</a>
-            <?php
-            while($row=mysqli_fetch_array($restar))
-            {
-                $totaal=$totaal+$row['Aantal']*$row['product_price'];
-
-            }
-            ?>
-            <?php
-            echo "</td>";
-        }
-    }
-
-    if ($totaal >= 1){ echo"<th> totaalprijs: "; echo "€ "; echo $totaal;
-        echo"</th>";
-    }
-    else{}
-
-
-    ?>
+  ?>
 
 
     <?php require_once("Bijhorend/footer.php");?>

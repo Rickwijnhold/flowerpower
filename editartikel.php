@@ -21,7 +21,6 @@ while($row=mysqli_fetch_assoc($result))
     $artikelName = $row['artikelnaam'];
     $artikelPrice = $row['prijs'];
     $artikelBeschrijving = $row['omschrijving'];
-    $artikelImage = $row['image'];
 }
 
 ?>
@@ -50,7 +49,6 @@ while($row=mysqli_fetch_assoc($result))
                         <input type="text" class="form-control mb-2" placeholder=" Artikel Name " name="name" value="<?php echo $artikelName ?>">
                         <input type="text" class="form-control mb-2" placeholder=" Artikel Price " name="price" value="<?php echo $artikelPrice ?>">
                         <input type="text" class="form-control mb-2" placeholder=" Artikel Beschrijving " name="beschrijving" value="<?php echo $artikelBeschrijving ?>">
-                        <input type="text" class="form-control mb-2" placeholder=" Artikel Image " name="image" value="<?php echo $artikelImage ?>">
 
                         <button class="btn btn-primary" name="update">Update</button>
                     </form>

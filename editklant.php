@@ -52,7 +52,7 @@ while($row=mysqli_fetch_assoc($result))
                 <div class="card-body">
 
                     <form action="updateklant.php?ID=<?php echo $UserID ?>" method="post">
-                        <input type="text" class="form-control mb-2" placeholder=" User Name " name="ID" value="<?php echo $UserID ?>">
+                        <input type="text" class="form-control mb-2" placeholder=" User ID " name="ID" value="<?php echo $UserID ?>">
                         <input type="text" class="form-control mb-2" placeholder=" User Username " name="name" value="<?php echo $username ?>">
                         <input type="email" class="form-control mb-2" placeholder=" User Email " name="email" value="<?php echo $email ?>">
                         <input type="text" class="form-control mb-2" placeholder=" User Voornaam " name="voornaam" value="<?php echo $voornaam ?>">

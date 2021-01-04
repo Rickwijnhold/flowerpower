@@ -1,7 +1,7 @@
 <?php
 
-function component($artikelname, $artikelprice, $artikelimg, $artikelid, $artikelbeschrijving){
-    $element = "
+    function component($artikelname, $artikelprice, $artikelimg, $artikelid, $artikelbeschrijving){
+        $element = "
 	
 	<div class=\"col-md-3 col-sm-6 my-3 my-md-3\">
 			<form action=\"producten.php\" method=\"POST\">
@@ -19,21 +19,24 @@ function component($artikelname, $artikelprice, $artikelimg, $artikelid, $artike
 						<h5>
 							<span class=\"price text-white\">€ $artikelprice</span>
 						</h5>
-						
-						<button type=\"submit\" class=\"btn btn-warning my-3\" name=\"add\">Toevoegen winkelmand <i class=\"fas fa-shopping-cart\"></i></button>
 						<input type='hidden' name='idartikel' value='$artikelid'>
+						<input type='hidden' name='nameartikel' value='$artikelname'>
+						<input type='hidden' name='priceartikel' value='$artikelprice'>
+						
+						<button type=\"submit\" class=\"btn btn-warning my-3 addItemBtn\" name=\"add\">Toevoegen winkelmand <i class=\"fas fa-shopping-cart\"></i></button>
+						
 					</div>
 				</div>
 			</form>
 		</div>
 	
 	";
-    echo $element;
-}
+        echo $element;
+    }
 
 
-function cartElement($artikelimg, $artikelname, $artikelprice, $artikelid, $artikelbeschrijving){
-    $element = "
+    function cartElement($artikelimg, $artikelname, $artikelprice, $artikelid, $artikelbeschrijving){
+        $element = "
 	
 	<form action=\"winkelmand.php?action=remove&id=$artikelid\" method=\"post\" class=\"cart-items\">
 					<div class=\"border rounded\">
@@ -62,5 +65,5 @@ function cartElement($artikelimg, $artikelname, $artikelprice, $artikelid, $arti
 	
 	";
 
-    echo $element;
-}
+        echo $element;
+    }

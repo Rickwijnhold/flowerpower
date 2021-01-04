@@ -16,9 +16,8 @@ if(isset($_POST['update']))
     $name = $_POST['name'];
     $price = $_POST['price'];
     $beschrijving = $_POST['beschrijving'];
-    $image = $_POST['image'];
 
-    $query = " update artikel set artikelnaam = '".$name."', prijs='".$price."',omschrijving='".$beschrijving."', image='".$image."' where idartikel = '".$id."'";
+    $query = " update artikel set artikelnaam = '".$name."', prijs='".$price."',omschrijving='".$beschrijving."' where idartikel = '".$id."'";
     $result = mysqli_query($conn,$query);
 
     if($result)
@@ -37,6 +36,3 @@ else
 
 
 ?>
-update artikel set artikel_name = 'Rick', artikel_price= '11', artikel_beschrijving = 'test', artikel_image = 'test' where artikel_id = 1;
-
-deze lukt

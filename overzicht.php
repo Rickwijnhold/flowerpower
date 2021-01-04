@@ -1,16 +1,16 @@
 <?php
-session_start();
-include_once 'Bijhorend/databaseconnectie.php';
-if(!isset($_SESSION['userId'])){ //if login in session is not set
-    header("Location: homepage.php");
-}
-$id=$_GET["id"];
-$cart_status="";
-$rese=mysqli_query($conn, "select cart_status from cart where idklant=$id");
-while($row=mysqli_fetch_array($rese))
-{
-    $cart_status=$row["cart_status"];
-}
+    session_start();
+    include_once 'Bijhorend/databaseconnectie.php';
+    if(!isset($_SESSION['userId'])){ //if login in session is not set
+        header("Location: homepage.php");
+    }
+    $id=$_GET["id"];
+    $cart_status="";
+    $rese=mysqli_query($conn, "select cart_status from cart where idklant=$id");
+    while($row=mysqli_fetch_array($rese))
+    {
+        $cart_status=$row["cart_status"];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,49 +44,49 @@ while($row=mysqli_fetch_array($rese))
     </thead>
     <tbody>
     <?php
-    echo"<div class='border border-secondary'>";
-    $res=mysqli_query($conn, "SELECT product_name, Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id");
-    $ress=mysqli_query($conn, "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id");
-    $resss=mysqli_query($conn, "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id join klant where klant.idklant = $id");
-    $totaal =0;
-    echo '<h4>Bestelling</h4>';
+        echo"<div class='border border-secondary'>";
+        $res=mysqli_query($conn, "SELECT product_name, Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id");
+        $ress=mysqli_query($conn, "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.cart_id = $id");
+        $resss=mysqli_query($conn, "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id join klant where klant.idklant = $id");
+        $totaal =0;
+        echo '<h4>Bestelling</h4>';
 
-    if($row=mysqli_fetch_assoc($ress))
-    {
-        echo'Datum: ';echo $row['cart_date']; echo '<br>';
-        echo 'Bestelnummer: '; echo $row['cart_id']; echo '<br><br>';
-
-
-        ?>
-        <form action="" method="POST">
-            <input type="text" name="status" placeholder="status" value="<?php echo $cart_status; ?>">
-            <button type="submit" name="update">Update</button>
-        </form>
-        <br>
-        <?php
-
-    }
-    if($row=mysqli_fetch_assoc($resss))
-    {
-        echo'Klant / Afleveradres <br>';echo $row['voornaam']; echo '<br>';
-        echo ''; echo $row['adres']; echo '<br>';
-        echo 'postcode: '; echo $row['postcode']; echo '<br><br>';
-
-    }
-    echo'<h6>Producten</h6>';
-    while($row=mysqli_fetch_assoc($res))
-    {
-        $totaal=$totaal+$row['Aantal']*$row['product_price'];
+        if($row=mysqli_fetch_assoc($ress))
+        {
+            echo'Datum: ';echo $row['cart_date']; echo '<br>';
+            echo 'Bestelnummer: '; echo $row['cart_id']; echo '<br><br>';
 
 
+            ?>
+            <form action="" method="POST">
+                <input type="text" name="status" placeholder="status" value="<?php echo $cart_status; ?>">
+                <button type="submit" name="update">Update</button>
+            </form>
+            <br>
+            <?php
 
-        echo"<tr>";
-        echo"<td>";echo $row['Aantal']; echo "</td>";
-        echo"<td>"; echo $row['product_name']; echo "</td>";
-        echo"<td>"; echo $row['product_price'];  echo "</td>";
-        echo"</tr>";
+        }
+        if($row=mysqli_fetch_assoc($resss))
+        {
+            echo'Klant / Afleveradres <br>';echo $row['voornaam']; echo '<br>';
+            echo ''; echo $row['adres']; echo '<br>';
+            echo 'postcode: '; echo $row['postcode']; echo '<br><br>';
 
-    }
+        }
+        echo'<h6>Producten</h6>';
+        while($row=mysqli_fetch_assoc($res))
+        {
+            $totaal=$totaal+$row['Aantal']*$row['product_price'];
+
+
+
+            echo"<tr>";
+            echo"<td>";echo $row['Aantal']; echo "</td>";
+            echo"<td>"; echo $row['product_name']; echo "</td>";
+            echo"<td>"; echo $row['product_price'];  echo "</td>";
+            echo"</tr>";
+
+        }
 
 
     ?>
@@ -96,24 +96,24 @@ while($row=mysqli_fetch_array($rese))
 
 
 <?php
-if(isset($_POST["update"]))
-{
-    mysqli_query($conn,"update cart set cart_status='$_POST[status]' where idklant=$id");
+    if(isset($_POST["update"]))
+    {
+        mysqli_query($conn,"update cart set cart_status='$_POST[status]' where idklant=$id");
 
-    ?>
-    <script type="text/javascript">
-        window.location="bestellingen.php";
-    </script>
-    <?php
+        ?>
+        <script type="text/javascript">
+            window.location="bestellingen.php";
+        </script>
+        <?php
 
 
-}
+    }
 ?>
 
 
 
 <?php
-require "Bijhorend/footer.php";
+    require "Bijhorend/footer.php";
 ?>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

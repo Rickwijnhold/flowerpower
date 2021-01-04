@@ -54,8 +54,7 @@ error_reporting(0);
 <table class="container">
     <thead>
     <tr>
-        <th>Aantal</th>
-        <th>Omschrijving</th>
+        <th>Product(en)</th>
         <th>Prijs</th>
     </tr>
     </thead>
@@ -64,17 +63,16 @@ error_reporting(0);
     echo"<div class='border border-secondary'>";
     if(isset($_SESSION['userId'])){ //if login in session is not set
         $userId = $_SESSION['userId'];
-        $res=mysqli_query($conn, "SELECT product_name, Aantal, product_price FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.idUsers = $userId;");
-        $ress=mysqli_query($conn, "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id where cart.idUsers = $userId;");
-        $resss=mysqli_query($conn, "SELECT * FROM cart join cartproducten on cart.cart_id = cartproducten.cart_id join klant where klant.idklant = $userId;");
+        $res=mysqli_query($conn, "SELECT products,amount_paid FROM orders where idklant = $userId;");
+        $ress=mysqli_query($conn, "SELECT * FROM orders where idklant = $userId;");
+        $resss=mysqli_query($conn, "SELECT * FROM orders join klant where klant.idklant = $userId;");
         $totaal =0;
     }
     echo '<h4>Bestelling</h4>';
 
     if($row=mysqli_fetch_assoc($ress))
     {
-        echo'Datum: ';echo $row['cart_date']; echo '<br>';
-        echo 'Bestelnummer: '; echo $row['cart_id']; echo '<br><br>';
+        echo 'Bestelnummer: '; echo $row['idorders']; echo '<br><br>';
 
 
         ?>
@@ -92,14 +90,12 @@ error_reporting(0);
     echo'<h6>Producten</h6>';
     while($row=mysqli_fetch_assoc($res))
     {
-        $totaal=$totaal+$row['Aantal']*$row['product_price'];
-
+$totaal = $row['amount_paid'];
 
 
         echo"<tr>";
-        echo"<td>";echo $row['Aantal']; echo "</td>";
-        echo"<td>"; echo $row['product_name']; echo "</td>";
-        echo"<td>"; echo $row['product_price'];  echo "</td>";
+        echo"<td>";echo $row['products']; echo "</td>";
+        echo"<td>"; echo $row['amount_paid']; echo "</td>";
         echo"</tr>";
 
     }

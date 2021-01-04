@@ -11,6 +11,9 @@ if(isset($_POST['remove'])){
         foreach($_SESSION['Cart'] as $key => $value){
             if($value["idartikel"] == $_GET['id']){
                 unset($_SESSION['Cart'][$key]);
+                $query = "DELETE FROM cartproducten WHERE product_id =" . $_GET['id'];
+                $result = mysqli_query($conn,$query);
+
             }
         }
     }
@@ -51,12 +54,29 @@ require_once('Bijhorend/header.php');
                 if(isset($_SESSION['Cart'])){
                     $artikel_id = array_column($_SESSION['Cart'], 'idartikel');
                     while($row = mysqli_fetch_assoc($resultt)){
+                        $id = $row['idartikel'];
+                        $naam = $row['artikelnaam'];
+                        $prijs = $row['prijs'];
                         foreach($artikel_id as $id){
                             if($row['idartikel'] == $id){
                                 cartElement($row['image'], $row['artikelnaam'], $row['prijs'], $row['idartikel'], $row['omschrijving']);
                                 $total = $total + (int)$row['prijs'];
+                                $query = " INSERT into cartproducten (product_name,product_price,Aantal,total_price)VALUES ('".$naam."','".$prijs."',1,'".$total."')";
+//                                $result = mysqli_query($conn,$query);
+
+                                while($row=mysqli_fetch_assoc($result))
+                                {
+                                    $id = $row['idartikel'];
+                                    $naam = $row['artikelnaam'];
+                                    $prijs = $row['prijs'];
+                                    $omschrijving = $row['omschrijving'];
+                                }
+
+
+
 
                             }
+
                         }
                     }
                 }else{
@@ -96,13 +116,22 @@ require_once('Bijhorend/header.php');
                             <?php
                             if (isset($_SESSION['Cart'])){
                                 echo '<br><br>
-								<form action="Bijhorend/bestelling.php" method="POST">
-						<button type="submit" name="submit">Bestelling plaatsen</button>
+<a href="checkout.php" class="btn btn-info"/>
+<i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
+						
 					</form>';
                             }else{
                                 echo "";
                             }
                             ?></h6>
+                        <?php
+                        if (isset($_POST['submit'])){
+                            echo '<script type="text/javascript"> alert("Bestelling geplaatst")</script>';
+
+                        }else{
+
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

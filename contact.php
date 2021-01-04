@@ -50,7 +50,7 @@ error_reporting(0);
 
         <textarea name="message" class="form-control2" placeholder="Message" row="4" required></textarea><br>
 
-        <input type="submit" class="form-control2 submit" value="SEND MESSAGE"
+        <input type="submit" class="form-control2  submit" value="SEND MESSAGE"
     </form>
 </div>
 <p>Winkels die wij hebben en telefoon-nummers</p>
