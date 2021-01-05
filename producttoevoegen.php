@@ -85,7 +85,7 @@ error_reporting(0);
                         <td><?php echo $artikelName ?></td>
                         <td><?php echo $artikelPrice ?></td>
                         <td><?php echo $artikelBeschrijving ?></td>
-                        <td><?php $mysqli = new mysqli('localhost:3306','root','Dobbelsteen12!','flowerpower');
+                        <td><?php $mysqli = new mysqli('us-cdbr-east-02.cleardb.com:3306','be26b0662d82f4','08796b83','heroku_75a623df7bc9414');
                         $query = "SELECT image from artikel where idartikel = $artikelId";
                         $stmt = $mysqli->prepare($query) or die('Error preparing.');
                         $stmt->bind_result($artikelImage) or die('Error binding results.');
