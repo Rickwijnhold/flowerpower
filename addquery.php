@@ -45,16 +45,7 @@
 //?>
 <?php
 // Include the database configuration file
-    $servername = "us-cdbr-east-02.cleardb.com";
-    $user = "be26b0662d82f4";
-    $password = "08796b83";
-    $dBName = "heroku_75a623df7bc9414";
-
-    $conn = mysqli_connect($servername, $user, $password, $dBName);
-
-    if (!$conn) {
-        die("connection failed: ".mysqli_connect_error());
-    }
+    require 'Bijhorend/databaseconnectie.php';
 $name = $_POST['name'];
 $price = $_POST['price'];
 $beschrijving = $_POST['beschrijving'];
@@ -68,7 +59,7 @@ move_uploaded_file($temp_location,$target_location);
 
 
 
-$mysqli = new mysqli("us-cdbr-east-02.cleardb.com", "be26b0662d82f4","08796b83","heroku_75a623df7bc9414") or die('Error connecting.');
+$mysqli = new mysqli("us-cdbr-east-02.cleardb.com:3306", "be26b0662d82f4","08796b83","heroku_75a623df7bc9414") or die('Error connecting.');
 $query = "INSERT INTO artikel VALUES (0,?,?,?,?)";
 $stmt = $mysqli->prepare($query) or die('Error preparing.');
 $stmt->bind_param('ssss', $target_location,$name,$price,$beschrijving) or die('Error binding params');
