@@ -9,10 +9,10 @@ $id=$_GET['id'];
 <?php
     session_start();
 
-    $servername = "localhost:3306";
-    $user = "root";
-    $password = "Dobbelsteen12!";
-    $dBName = "flowerpower";
+    $servername = "us-cdbr-east-02.cleardb.com";
+    $user = "be26b0662d82f4";
+    $password = "08796b83";
+    $dBName = "heroku_75a623df7bc9414";
 
     $conn = mysqli_connect($servername, $user, $password, $dBName);
 

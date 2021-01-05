@@ -1,16 +1,16 @@
 <?php
     session_start();
 
-$servername = "localhost:3306";
-$user = "root";
-$password = "Dobbelsteen12!";
-$dBName = "flowerpower";
+    $servername = "us-cdbr-east-02.cleardb.com";
+    $user = "be26b0662d82f4";
+    $password = "08796b83";
+    $dBName = "heroku_75a623df7bc9414";
 
-$conn = mysqli_connect($servername, $user, $password, $dBName);
+    $conn = mysqli_connect($servername, $user, $password, $dBName);
 
-if (!$conn) {
-    die("connection failed: ".mysqli_connect_error());
-}
+    if (!$conn) {
+        die("connection failed: ".mysqli_connect_error());
+    }
 if(!isset($_SESSION['userId'])){ //if login in session is not set
     header("Location: index.php");
 }

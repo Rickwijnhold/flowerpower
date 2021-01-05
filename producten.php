@@ -89,7 +89,7 @@ error_reporting(0);
 
 
         <?php
-        $DBConnect5 = new mysqli("localhost:3306","root","Dobbelsteen12!","flowerpower");
+        $DBConnect5 = new mysqli("us-cdbr-east-02.cleardb.com","be26b0662d82f4","08796b83","heroku_75a623df7bc9414");
         $result = "SELECT * FROM artikel";
         $resultt = $DBConnect5->query($result);
         $resss = "SELECT * from artikel order by idartikel";
