@@ -6,7 +6,7 @@ session_start();
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-success  text-white">
-        <a class="logo" href="./homepage.php">
+        <a class="logo" href="./index.php">
             <img src="./plaatjes/logo.png" height="50px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" href="homepage.php">Home | <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="index.php">Home | <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="producten.php">Producten |</a>

@@ -15,7 +15,7 @@ if (!$conn) {
     die("connection failed: ".mysqli_connect_error());
 }
 if(!isset($_SESSION['userId'])){ //if login in session is not set
-    header("Location: homepage.php");
+    header("Location: index.php");
 }
 // informatie uit database halen
 $result = "select cart_status from cart where idklant='userId'";

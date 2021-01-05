@@ -34,7 +34,7 @@ if (isset($_POST['login-submit'])) {
                     $_SESSION['userId'] = $row['idklant'];
                     $_SESSION['userUid'] = $row['usernaam'];
 
-                    header("Location: ../homepage.php?login=succes");
+                    header("Location: ../index.php?login=succes");
                     exit();
                 }
                 else if ($pwdCheck == true){
@@ -43,16 +43,16 @@ if (isset($_POST['login-submit'])) {
                    $userid = $_SESSION['userId'] = $row['idklant'];
                     $username = $_SESSION['userUid'] = $row['usernaam'];
 
-                    header("Location: ../homepage.php?login=succes");
+                    header("Location: ../index.php?login=succes");
                     exit();
                 }
                 else{
-                    header("Location: ../homepage.php?error=wrongpwd");
+                    header("Location: ../index.php?error=wrongpwd");
                     exit();
                 }
             }
             else {
-                header("Location: ../homepage.php?error=nouser");
+                header("Location: ../index.php?error=nouser");
                 exit();
             }
         }
@@ -61,6 +61,6 @@ if (isset($_POST['login-submit'])) {
 }
 
 else {
-    header("Location: ../homepage.php");
+    header("Location: ../index.php");
     exit();
 }

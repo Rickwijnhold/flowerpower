@@ -2,7 +2,7 @@
     session_start();
     include_once 'Bijhorend/databaseconnectie.php';
     if(!isset($_SESSION['userId'])){ //if login in session is not set
-        header("Location: homepage.php");
+        header("Location: index.php");
     }
     $id=$_GET["id"];
     $cart_status="";
